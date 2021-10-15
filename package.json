@@ -1,0 +1,18 @@
+{
+  "name": "api-manufacture",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MinTic-2021/api-manufacture.git",
+  "author": "DevFull",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "supervisor server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^4.1.3"
+  }
+}
