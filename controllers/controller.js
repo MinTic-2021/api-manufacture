@@ -27,4 +27,10 @@ const editarUsuario = async (edicion, callback) => {
     .findOneAndUpdate(usuarioAactualizar, operacion, { upsert: true }, callback)
 }
 
-export {queryAllUsers, crearUsuario, editarUsuario}
+const eliminarUsuario = async(id, callback) => {
+    const usuarioAeliminar = { _id: new ObjectId(id) }
+    const conexion = getBD()
+    conexion.collection('usuarios').deleteOne(usuarioAeliminar, callback)
+}
+
+export {queryAllUsers, crearUsuario, editarUsuario, eliminarUsuario}
