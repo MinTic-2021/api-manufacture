@@ -13,20 +13,20 @@ const genericCallback = (res) => {
     }
 } 
 
-rutasUsuarios.route('/gusu/admin').get((req, res) => {
+rutasUsuarios.route('/gusu').get((req, res) => {
     queryAllUsers(genericCallback(res))
 })
 
-rutasUsuarios.route('/gusu/nuevo').post((req, res) => {
+rutasUsuarios.route('/gusu').post((req, res) => {
    crearUsuario(req.body, genericCallback(res))
 })
 
-rutasUsuarios.route('/gusu/editar').patch((req, res) => {
-    editarUsuario(req.body, genericCallback(res))
+rutasUsuarios.route('/gusu/:id').patch((req, res) => {
+    editarUsuario(req.params.id, req.body, genericCallback(res))
 })
 
-rutasUsuarios.route('/gusu/eliminar').delete((req, res) => {
-   eliminarUsuario(req.body.id, genericCallback(res))
+rutasUsuarios.route('/gusu/:id').delete((req, res) => {
+   eliminarUsuario(req.params.id, genericCallback(res))
 })
 
 export default rutasUsuarios

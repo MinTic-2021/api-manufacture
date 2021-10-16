@@ -14,10 +14,9 @@ const crearUsuario = async (nuevo, callback) => {
     await conexion.collection('usuarios').insertOne(nuevo, callback)
 }
 
-const editarUsuario = async (edicion, callback) => {
-    const usuarioAactualizar = { _id: new ObjectId(edicion._id) }
-    console.log("usuario a Actualizar: ", usuarioAactualizar._id)
-    delete edicion._id
+const editarUsuario = async (id, edicion, callback) => {
+    const usuarioAactualizar = { _id: new ObjectId(id) }
+    console.log("usuario a Actualizar: ", id)
     const operacion = {
         $set: edicion,
     }
