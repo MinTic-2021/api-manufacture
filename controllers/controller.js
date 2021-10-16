@@ -1,4 +1,5 @@
 import { getBD } from "../db/db.js"
+import { ObjectId } from "mongodb"
 
 const queryAllUsers = async (callback) => {
     const conexion = getBD()
@@ -10,7 +11,20 @@ const queryAllUsers = async (callback) => {
 
 const crearUsuario = async (nuevo, callback) => {
     const conexion = getBD()
-    conexion.collection('usuarios').insertOne(nuevo, callback)
+    await conexion.collection('usuarios').insertOne(nuevo, callback)
 }
 
-export {queryAllUsers, crearUsuario}
+const editarUsuario = async (edicion, callback) => {
+    const usuarioAactualizar = { _id: new ObjectId(edicion._id) }
+    console.log("usuario a Actualizar: ", usuarioAactualizar._id)
+    delete edicion._id
+    const operacion = {
+        $set: edicion,
+    }
+    const conexion = getBD()
+    await conexion
+    .collection('usuarios')
+    .findOneAndUpdate(usuarioAactualizar, operacion, { upsert: true }, callback)
+}
+
+export {queryAllUsers, crearUsuario, editarUsuario}

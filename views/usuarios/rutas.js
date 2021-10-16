@@ -1,5 +1,5 @@
 import Express from 'express'
-import { queryAllUsers, crearUsuario } from '../../controllers/controller.js'
+import { queryAllUsers, crearUsuario, editarUsuario } from '../../controllers/controller.js'
 import { getBD } from '../../db/db.js'
 
 const rutasUsuarios = Express.Router()
@@ -23,25 +23,7 @@ rutasUsuarios.route('/gusu/nuevo').post((req, res) => {
 })
 
 rutasUsuarios.route('/gusu/editar').patch((req, res) => {
-    const edicion = req.body
-    console.log(edicion)
-    const usuarioAactualizar = { _id: new ObjectId(edicion._id) }
-    console.log("usuario a Actualizar: ", usuarioAactualizar._id)
-    delete edicion._id
-    const operacion = {
-        $set: edicion,
-    }
-    const conexion = getBD()
-    conexion.collection('usuarios').findOneAndUpdate(usuarioAactualizar, operacion, { upsert: true }, (err, result) => {
-        if(err){
-            console.error("Error actualizando el usuario", err)
-            res.sendStatus(500)
-        }else{
-            console.log('Usuario actualizado exitosamente')
-            res.sendStatus(200)
-        }
-    })
-
+    editarUsuario(req.body, genericCallback(res))
 })
 
 rutasUsuarios.route('/gusu/eliminar').delete((req, res) => {
