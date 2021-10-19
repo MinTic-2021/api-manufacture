@@ -6,6 +6,7 @@ import rutasUsuarios from './views/usuarios/rutas.js'
 import rutasVentas from './views/ventas/rutasVentas.js'
 import jwt from 'express-jwt'
 import jwks from 'jwks-rsa'
+import rutasProductos from './views/productos/rutas.js'
 
 dotenv.config({patch: './.env'})
 const app = Express() // Crea servidor 
@@ -28,6 +29,7 @@ app.use(jwtCheck)
 app.use(Express.json()) // Convierte las solicitudes entrantes en formato json en un objeto manipulable 
 app.use(rutasUsuarios)
 app.use(rutasVentas)
+app.use(rutasProductos)
 
 const main = () => {
     return app.listen(process.env.PORT, () =>{ // Establece el puerto de escucha de solicitudes
