@@ -3,6 +3,7 @@ import { conectarBD } from './db/db.js'
 import dotenv from 'dotenv'
 import Cors from 'cors'
 import rutasUsuarios from './views/usuarios/rutas.js'
+import rutasVentas from './views/ventas/rutasVentas.js'
 import jwt from 'express-jwt'
 import jwks from 'jwks-rsa'
 
@@ -26,6 +27,7 @@ var jwtCheck = jwt({
 app.use(jwtCheck)
 app.use(Express.json()) // Convierte las solicitudes entrantes en formato json en un objeto manipulable 
 app.use(rutasUsuarios)
+app.use(rutasVentas)
 
 const main = () => {
     return app.listen(process.env.PORT, () =>{ // Establece el puerto de escucha de solicitudes
